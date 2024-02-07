@@ -9,6 +9,8 @@ def main():
         odoo = odoo_actions.OdooActions(url, db, username, password)
         # record_id = odoo.search_record('res.users', [('name','=',"Alejandro Minor")])
         # print(record_id)
+        # odoo.execute_model_method('model_name', 'method_name', record_id, 'arg1', 'arg2', 'arg3')
+        # odoo.execute_model_method('model_name', 'method_name', record_id)
 
     except Exception as e:
         print(e)
