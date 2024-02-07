@@ -1,4 +1,3 @@
-import datetime
 import socket
 import xmlrpc.client
 
@@ -20,23 +19,23 @@ class OdooActions:
             self.models = xmlrpc.client.ServerProxy("{}/xmlrpc/2/object".format(self.url))
 
             self.uid = common.authenticate(self.db, self.username, self.password, {})
-            print(f"Conectado a la base de datos {self.db}")
+            print(f"Connected to the database: {self.db}")
         
         except socket.timeout:
-            print(f"Error al conectarse a la base de datos {self.db}")
+            print(f"Connection timed out for: {self.db}")
             
         except Exception as e:
-            print(f"Error al conectarse a la base de datos {self.db}")
+            print(f"Error connecting to the database: {self.db}")
             print(e)
 
     def search_record(self, model, domain):
         try:
             record_id = self.models.execute_kw(self.db, self.uid, self.password, model, 'search',[domain])
             if record_id:
-                print(f"{self.db} Se encontró el registro con id {record_id}")
+                print(f"{self.db}: Record found with the ID: {record_id}")
                 return record_id
             else:
-                print("No se encontró el registro")
+                print("The record was not found")
                 return False
             
         except Exception as e:
@@ -47,9 +46,9 @@ class OdooActions:
         try:
             update = self.models.execute_kw(self.db, self.uid, self.password, model, 'write',[record_id, values])
             if update:
-                print(f"{self.db} Se actualizó el registro con id {record_id}")
+                print(f"{self.db}: The record with id {record_id} has been updated.")
             else:
-                print("No se actualizó el registro")
+                print(f"The record {record_id} was not updated")
         except Exception as e:
             print(e)
             return False
@@ -57,7 +56,7 @@ class OdooActions:
     def create_record(self, model, values):
         try:
             record_id = self.models.execute_kw(self.db, self.uid, self.password, model, 'create',[values])
-            print(f"{self.db} Se creó el registro con id {record_id}")
+            print(f"{self.db}: The record with id {record_id} has been created.")
             return record_id
         except Exception as e:
             print(e)
