@@ -7,8 +7,8 @@ def main():
 
     try:
         odoo = odoo_actions.OdooActions(url, db, username, password)
-        record_id = odoo.search_record('res.users', [('name','=',"Alejandro Minor")])
-        print(record_id)
+        # record_id = odoo.search_record('res.users', [('name','=',"Alejandro Minor")])
+        # print(record_id)
 
     except Exception as e:
         print(e)
