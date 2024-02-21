@@ -62,9 +62,9 @@ class OdooActions:
             print(e)
             return False
                
-    def execute_model_method(self, model, method, id, *args):
+    def execute_model_method(self, model, method, id, *args, **kwargs):
         try:
-            result = self.models.execute_kw(self.db, self.uid, self.password, model, method, [int(id)] + list(args))
+            result = self.models.execute_kw(self.db, self.uid, self.password, model, method, [int(id)] + list(args), kwargs)
             print(f"{self.db}: The method {method} has been executed.")
             return result
         except Exception as e:
