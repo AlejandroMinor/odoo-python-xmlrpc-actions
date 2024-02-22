@@ -12,7 +12,7 @@ class OdooActions:
 
     def connect(self):
         try:
-            timeout = 10
+            timeout = 30
             socket.setdefaulttimeout(timeout)
 
             common = xmlrpc.client.ServerProxy("{}/xmlrpc/2/common".format(self.url))
@@ -61,7 +61,7 @@ class OdooActions:
         except Exception as e:
             print(e)
             return False
-               
+
     def execute_model_method(self, model, method, id, *args, **kwargs):
         try:
             result = self.models.execute_kw(self.db, self.uid, self.password, model, method, [int(id)] + list(args), kwargs)
@@ -69,4 +69,14 @@ class OdooActions:
             return result
         except Exception as e:
             print(f"An error occurred while executing method {method} on model {model}: {e}")
+            return False
+        
+
+    def read_record(self, model, record_id):
+        try:
+            record = self.models.execute_kw(self.db, self.uid, self.password, model, 'read',[record_id])
+            print(f"{self.db}: The record with id {record_id} has been read.")
+            return record
+        except Exception as e:
+            print(e)
             return False
