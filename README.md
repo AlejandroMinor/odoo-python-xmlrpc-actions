@@ -14,7 +14,7 @@ La herramienta funciona por medio de los campos:
 
 Estos estan disponibles en el archivo `__main__.py`
 
-2. **Agregar logica en __main__.py**
+2. **Agregar logica en `__main__.py`**
 
 Agregar logica a partir de la instancia  odoo = odoo_actions.OdooActions(url, db, username, password)
 
