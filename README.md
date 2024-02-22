@@ -27,9 +27,9 @@ record_id = odoo.search_record('res.users', [('name','=',"Alejandro Minor")])
 
 3. **Ejecutar**
 
-	```shell
+```shell
 python3 odoo-python-xmlrpc-actions
-	```
+```
 
 ## Características y opciones
 ___
