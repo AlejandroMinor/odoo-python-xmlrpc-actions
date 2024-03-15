@@ -10,7 +10,7 @@ La herramienta funciona por medio de los campos:
 - username: Nombre de usuario en odoo 
 - password: Contraseña del usuario en odoo
 - db: Nombre de la base de datos a la que se va a conectar
-- url: Url de la web (Ejemplo http://localhost:8069)
+- url: Url de la web (Ejemplo http://localhost:8069. SIN el signo de diagonal / al final )
 
 Estos estan disponibles en el archivo `__main__.py`
 
