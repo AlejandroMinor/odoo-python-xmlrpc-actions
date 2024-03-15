@@ -1,13 +1,15 @@
 import socket
 import xmlrpc.client
+import ssl
 
 class OdooActions:
-    def __init__(self,url,db,username,password):
+    def __init__(self,url,db,username,password, ssl_verify=True):
 
         self.url = url
         self.db = db
         self.username = username
         self.password = password
+        self.ssl_verify = ssl_verify
         self.connect()
 
     def connect(self):
@@ -15,8 +17,14 @@ class OdooActions:
             timeout = 30
             socket.setdefaulttimeout(timeout)
 
-            common = xmlrpc.client.ServerProxy("{}/xmlrpc/2/common".format(self.url))
-            self.models = xmlrpc.client.ServerProxy("{}/xmlrpc/2/object".format(self.url))
+            context = None
+            if not self.ssl_verify:
+                context = ssl.create_default_context()
+                context.check_hostname = False
+                context.verify_mode = ssl.CERT_NONE
+
+            common = xmlrpc.client.ServerProxy("{}/xmlrpc/2/common".format(self.url), context=context)
+            self.models = xmlrpc.client.ServerProxy("{}/xmlrpc/2/object".format(self.url), context=context)
 
             self.uid = common.authenticate(self.db, self.username, self.password, {})
             print(f"Connected to the database: {self.db}")
